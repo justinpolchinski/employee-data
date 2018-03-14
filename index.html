@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script type="text/javascript" src="javascript.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    
     <title>Employee Data</title>
 
 </head>
@@ -22,21 +23,27 @@
                 Hey there girl!
             </p>
     </div>
-    <table class="table col-sm-8 col-sm-offset-1">
-            <thead>
-              <tr>
-                <th scope="col">Employtee Name</th>
-                <th scope="col">Role</th>
-                <th scope="col">Start Date</th>
-                <th scope="col">Months Worked</th>
-                <th scope="col">Monthly Rate ($)</th>
-                <th scope="col">Total Billed ($)</th>
-              </tr>
-            </thead>
-            <tbody>
-           
-            </tbody>
-           </table>
+    <div class="col-sm-8 col-sm-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>Current Employees</h3></div>
+      <div class="panel-body">
+        <p><table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Employeee Name</th>
+              <th scope="col">Role</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">Months Worked</th>
+              <th scope="col">Monthly Rate ($)</th>
+              <th scope="col">Total Billed ($)</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table></p>
+      </div>
+    </div>
+  </div>
     <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
               <div class="panel panel-default">
@@ -59,7 +66,7 @@
                     </div>
                     <div class="form-group">
                       <label>Monthly Rate</label>
-                      <input class="form-control" id="" type="number">
+                      <input class="form-control" id="monthly-rate" type="number">
                     </div>
                     <button class="btn btn-primary" id="submit" type="submit">Submit</button>
                   </form>
@@ -68,6 +75,6 @@
             </div>
       
           </div>
-    
+          <script type="text/javascript" src="javascript.js"></script>   
 </body>
 </html>

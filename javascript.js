@@ -16,8 +16,8 @@ var config = {
   // Initial Values
   var name = "";
     var role = "";
-    var startDate = "";
-    var monthlyRate = "";
+    var startDate ;
+    var monthlyRate ;
 
     // Capture Button Click
     $("#submit").on("click", function(event) {
@@ -27,8 +27,10 @@ var config = {
     // Grabbed values from text boxes
     name = $("#employee-name").val().trim();
     role = $("#role").val().trim();
-    startDate = $("#start-date").val().trim();
-    monthlyRate = $("#monthly-rate").val().trim();
+    startDate = $("#start-date").val();   
+    monthlyRate = $("#monthly-rate").val();
+    console.log(startDate);
+    
     // Code for handling the push
     lastPushed = database.ref().push({
       name: name,
@@ -40,23 +42,35 @@ var config = {
 
 
   // Firebase watcher + initial loader + order/limit HINT: .on("child_added"
-  database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function(snapshot) {
+  //database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function(snapshot) {
+    database.ref().orderByChild("dateAdded").on("child_added", function(snapshot){
     // storing the snapshot.val() in a variable for convenience
     var sv = snapshot.val();
-
+    var convertedDate = moment(sv.startDate, 'YYYY-MM-DD');
+    months = moment(convertedDate.diff(moment(), "months"));
     // Console.loging the last user's data
-    console.log(sv.name);
-    console.log(sv.email);
-    console.log(sv.age);
-    console.log(sv.comment);
+    //snapStartDate = new Date(sv.startDate);
+    todaysDate = new Date();
+    console.log("Today: " + todaysDate);
+    //months = Math.floor((new Date() - snapStartDate)  / (60*1000*60*24*30))
+    
+    totalBilled = months * sv.monthlyRate;
+    console.log("name: "+ sv.name);
+    console.log(sv.role);
+    //console.log("SnapStartDate: " + snapStartDate);
+    console.log("StartDate: " + sv.startDate);
+    console.log(sv.monthlyRate);
 
     // Change the HTML to reflect
-    $("#name-display").text(sv.name);
-    $("#email-display").text(sv.email);
-    $("#age-display").text(sv.age);
-    $("#comment-display").text(sv.comment);
+    // $("tbody").text(sv.name);
+    // $("").text(sv.role);
+    // $("").text(sv.startDate);
+    // $("").text(sv.monthlyRate);
+    $('tbody').append(`<tr><td>${sv.name}</td><td>${sv.role}</td>
+    <td>${sv.startDate}</td><td>${months}  </td><td>${sv.monthlyRate}</td><td>${totalBilled}</td></tr>`)
 
     // Handle the errors
   }, function(errorObject) {
     console.log("Errors handled: " + errorObject.code);
+    
   });
